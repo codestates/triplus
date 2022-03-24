@@ -42,7 +42,7 @@ export default function ManagementPage() {
   const [isOpen, setOpen] = useState(false);
   const [guideInfo, setGuideInfo] = useState([]);
   const [applicantInfo, setApplicantInfo] = useState([]);
-  const [isAreadySet, setAreaySet] = useState(false);
+  const [isAreadySet, setAreadySet] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleted, setIsdeleted] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
@@ -60,9 +60,9 @@ export default function ManagementPage() {
       return;
     }
     if (guideInfo.title) {
-      setTimeout(() => setAreaySet(true), 0);
+      setTimeout(() => setAreadySet(true), 0);
       setTimeout(() => {
-        setAreaySet(false);
+        setAreadySet(false);
       }, 1000);
     } else {
       setOpen(!isOpen);
