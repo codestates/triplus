@@ -14,11 +14,14 @@ const TempleteBlock = styled.div`
   }
 `;
 
-export default function SignupTemplete(props) {
+export default function SignupTemplete({ isOpenConfirmModal, onCancelButtonClick }) {
   return (
     <TempleteBlock>
       <SignupHeader />
-      <SignupSection props={props} />
+      <SignupSection
+        isOpenConfirmModal={isOpenConfirmModal}
+        onCancelButtonClick={onCancelButtonClick}
+      />
     </TempleteBlock>
   );
 }

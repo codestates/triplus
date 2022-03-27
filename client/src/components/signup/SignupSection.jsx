@@ -15,8 +15,7 @@ const SectionBlock = styled.div`
   }
 `;
 
-export default function SignupSection(props) {
-  const { handleModalClick } = props.props;
+export default function SignupSection({ isOpenConfirmModal, onCancelButtonClick }) {
   const [message, setMessage] = useState({
     userId: '',
     password: '',
@@ -85,7 +84,7 @@ export default function SignupSection(props) {
       setValid({ ...valid, check: true });
     }
   };
-  const handleSignupClick = () => {
+  const onSubmitSignUpInfo = () => {
     let result = [];
     for (let key in valid) {
       if (valid[key] === false) {
@@ -101,7 +100,7 @@ export default function SignupSection(props) {
       };
       signUp(body).then((res) => {
         if (res.data.success) {
-          handleModalClick();
+          isOpenConfirmModal();
         }
       });
     } else {
@@ -134,7 +133,10 @@ export default function SignupSection(props) {
         checkMessage={message.check}
       />
       {signupErr ? <span className='errmessage'>정확한 정보를 기입해주세요</span> : null}
-      <SIgnupBtns handleSignupClick={handleSignupClick} />
+      <SIgnupBtns
+        onSignupButtonClick={onSubmitSignUpInfo}
+        onCancelButtonClick={onCancelButtonClick}
+      />
     </SectionBlock>
   );
 }
