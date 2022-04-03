@@ -26,7 +26,6 @@ const SectionCtn = styled.section`
 `;
 
 export default function TourManagementPage() {
-  //상태관리
   const state = useSelector((state) => state.openTourModalReducer);
   const isComplete = useSelector((state) => state.completeDeleteReducer);
   const { isOpen, modalInfo } = state;
@@ -36,9 +35,7 @@ export default function TourManagementPage() {
 
   const observerRef = useRef();
   const { items, hasMore, isLoading } = useFetch(pageNum, isActive, sortBy, isComplete);
-  // const [filterdItems, setFilteredItems] = useState([]);
 
-  //oberver핸들함수
   const observer = (node) => {
     if (isLoading) return;
     if (observerRef.current) observerRef.current.disconnect();

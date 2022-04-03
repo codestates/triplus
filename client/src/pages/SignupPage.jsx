@@ -3,7 +3,6 @@ import { Container } from '../styles/common/index';
 import styled from 'styled-components';
 import SignupTemplete from '../components/signup/SignupTemplete';
 import SignupModal from '../components/signup/SignupModal';
-import { useSelector } from 'react-redux';
 import ConfirmModal from '../components/signup/ConfirmModal';
 import { useNavigate } from 'react-router';
 
@@ -17,23 +16,37 @@ const PageContainer = styled(Container)`
 `;
 
 export default function SignupPage() {
-  const isModalOpen = useSelector((state) => state.openModalReducer);
-  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [isconfirmModalOpen, setisConfirmModalOpen] = useState(false);
+  const [isCancelConfirmModalOpen, setIsCancelConfirmModalOpen] = useState(false);
   const navigate = useNavigate();
-  const handleModalClick = () => {
-    setConfirmOpen(!confirmOpen);
-  };
-  const handleOnclick = () => {
-    setConfirmOpen(false);
-    navigate('/login');
-  };
+
   return (
     <>
-      {confirmOpen && <ConfirmModal handleOnclick={handleOnclick} />}
-      {isModalOpen ? <SignupModal /> : null}
       <PageContainer>
-        <SignupTemplete handleModalClick={handleModalClick} />
+        <SignupTemplete
+          isOpenConfirmModal={() => {
+            setisConfirmModalOpen(true);
+          }}
+          onCancelButtonClick={() => setIsCancelConfirmModalOpen(true)}
+        />
       </PageContainer>
+      {isconfirmModalOpen && (
+        <ConfirmModal
+          onConfirmButtonClick={() => {
+            setisConfirmModalOpen(false);
+            navigate('/login');
+          }}
+        />
+      )}
+      {isCancelConfirmModalOpen && (
+        <SignupModal
+          onOkclick={() => {
+            setIsCancelConfirmModalOpen(false);
+            navigate('/login');
+          }}
+          onCancelClick={() => setIsCancelConfirmModalOpen(false)}
+        />
+      )}
     </>
   );
 }

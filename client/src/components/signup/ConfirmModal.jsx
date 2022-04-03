@@ -22,22 +22,17 @@ const BtnBlock = styled.div`
   justify-content: center;
 `;
 
-export default function ConfirmModal(props) {
-  const { handleOnclick } = props;
-  const spanStyle = {
-    color: '#3386f7',
-  };
-
+export default function ConfirmModal({ onConfirmButtonClick }) {
   return (
     <Background>
       <ModalWrapper>
         <ModalTitle>
           입력하신 이메일로 <br />
           인증 이메일을 발송했습니다. <br />
-          <span style={spanStyle}>이메일 인증을 완료해주세요.</span>
+          <span style={{ color: '#3386f7' }}>이메일 인증을 완료해주세요.</span>
         </ModalTitle>
         <BtnBlock>
-          <OkBtn onClick={handleOnclick}>확인</OkBtn>
+          <OkBtn onClick={onConfirmButtonClick}>확인</OkBtn>
         </BtnBlock>
       </ModalWrapper>
     </Background>
